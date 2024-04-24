@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from cal.models import Event
 from django.views.generic import CreateView
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView ,DeleteView ,FormView
 from .forms import EventForm
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.utils import timezone
+
 
 @method_decorator(login_required, name='dispatch')
 class EventCreateView(CreateView):
@@ -41,6 +44,26 @@ class EventListView(ListView):
 class EventDetailView(DetailView):
     model = Event
     template_name = 'cal/event_detail.html'
+
+    def get_object(self, queryset=None):
+        event = get_object_or_404(Event, id=self.kwargs['event_id'], user=self.request.user)
+        return event
+    
+@method_decorator(login_required, name='dispatch')   
+class EventGlobalView(ListView):
+    model = Event
+    template_name = 'cal/events_global.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user, start_time__date=timezone.now().date())
+        return queryset
+    
+@method_decorator(login_required, name='dispatch')
+class EventDeleteView(DeleteView):
+    model = Event
+    template_name = 'cal/event_delete.html'
+    success_url = reverse_lazy('home')
 
     def get_object(self, queryset=None):
         event = get_object_or_404(Event, id=self.kwargs['event_id'], user=self.request.user)

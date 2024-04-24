@@ -87,6 +87,11 @@
     cursor: pointer;
   }
   
+  button.event-delete-button {
+    background-color: red;
+    color: white;
+  }
+
   button[type="submit"]:hover {
     background-color: #3E8E41;
   }

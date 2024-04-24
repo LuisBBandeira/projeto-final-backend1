@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div  style="text-align: center;">
+  <h1>Are you sure that you what to delete this event
+    <br><strong>Title :
+    <br>{{event.title}}
+    <br><strong>Description :
+    <br>{{event.description}}
+    <br><strong>Date:({{ event.start_time|date:'m-d-Y ' }}-{{ event.start_time|date:' h:i' }} - {{ event.end_time|date:' h:i' }})
+  </h1>
+</div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+      Delete
+    </button>
+  </form>
+{% endblock %}

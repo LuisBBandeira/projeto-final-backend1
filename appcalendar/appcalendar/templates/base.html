@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
 
+
     {% block head %}
     {% endblock %}
 </head>
@@ -19,6 +20,7 @@
                     <li><a href="{% url 'sign_out' %}">Logout</a></li>
                     <li><a href="{% url 'events_list' %}">Today events</a></li>
                     <li><a href="{% url 'event_create' %}">Create event</a></li>
+                    <li><a href="{% url 'event_global' %}">All events</a></li>
                 {% else %}
                     <li><a href="{% url 'sign_in' %}">Login</a></li>
                     <li><a href="{% url 'sign_up' %}">Sign Up</a></li>

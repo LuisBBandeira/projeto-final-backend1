@@ -13,15 +13,19 @@
     </nav>
 </header>
 {% block content %}
-  <div  style="text-align: center;">
-    <h1>Events for today</h1>
-    <ul>
-      {% for event in object_list %}
-      {% csrf_token %}
-        <li><a href="{% url 'event_detail' event.id %}">{{ event.title }} - {{ event.start_time }}</a></li>
-      {% empty %}
-        <li>No events for today.</li>
-      {% endfor %}
-    </ul>
+<div  style="text-align: center;">
+  <h1 class="text-3xl font-bold mb-4">All Events</h1>
+  <ul>
+    {% for event in object_list %}
+      <li>
+        <a href="{% url 'event_detail' event.pk %}">
+          {{ event.title }} ({{ event.start_time|date:'m-d-Y ' }}-{{ event.start_time|date:' h:i' }} - {{ event.end_time|date:' h:i' }})
+        </a>
+      </li>
+    {% empty %}
+      <li>No events found.</li>
+    {% endfor %}
+  </ul>
+</div>
   </div>
 {% endblock %}
