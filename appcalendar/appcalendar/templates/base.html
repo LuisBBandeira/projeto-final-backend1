@@ -17,6 +17,8 @@
             <ul>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'sign_out' %}">Logout</a></li>
+                    <li><a href="{% url 'events_list' %}">Today events</a></li>
+                    <li><a href="{% url 'event_create' %}">Create event</a></li>
                 {% else %}
                     <li><a href="{% url 'sign_in' %}">Login</a></li>
                     <li><a href="{% url 'sign_up' %}">Sign Up</a></li>

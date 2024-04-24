@@ -3,6 +3,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'cal/css/style.css' %}">
 </head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'sign_out' %}">Logout</a></li>
+                <li><a href="{% url 'events_list' %}">Today events</a></li>
+                <li><a href="{% url 'home' %}">home</a></li>
+            </ul>
+        </nav>
+    </header>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
