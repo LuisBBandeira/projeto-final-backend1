@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Calendar Django{% endblock %}</title>
+
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'sign_out' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'sign_in' %}">Login</a></li>
+                    <li><a href="{% url 'sign_up' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

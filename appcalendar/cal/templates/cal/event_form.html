@@ -1,0 +1,10 @@
+<head>
+    {% load static %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'cal/css/style.css' %}">
+</head>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Event</button>
+</form>
